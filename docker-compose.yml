@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  stock-api:
+    build:
+      context: ./stock-api
+      dockerfile: Dockerfile
+    container_name: stock-api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./stock-api/models:/app/models
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/stockess
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/ping || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend/stockess
+      dockerfile: Dockerfile
+    container_name: spring-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+     - gradle-cache:/home/gradle/.gradle
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/stockess
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      EXTERNAL_API_ROOT_URL: ${EXTERNAL_API_ROOT_URL}
+    depends_on:
+      - db
+      - stock-api
+
+  frontend:
+    build:
+      context: ./frontend/stockess
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+  gradle-cache:

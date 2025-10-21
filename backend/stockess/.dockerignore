@@ -1,0 +1,26 @@
+# IntelliJ / Eclipse / VS Code
+.idea
+*.iml
+.vscode
+.project
+.classpath
+.settings
+
+# Build output
+/build
+/target
+/out
+
+# Gradle caches
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!gradlew
+!gradlew.bat
+
+# Git
+.git
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
