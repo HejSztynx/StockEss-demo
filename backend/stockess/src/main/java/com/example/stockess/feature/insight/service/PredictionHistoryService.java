@@ -1,5 +1,6 @@
 package com.example.stockess.feature.insight.service;
 
+import com.example.stockess.feature.company.model.Company;
 import com.example.stockess.feature.company.service.CompanyService;
 import com.example.stockess.feature.insight.model.dto.PredictionDto;
 import com.example.stockess.feature.insight.repository.PredictionRepository;
@@ -18,8 +19,8 @@ public class PredictionHistoryService {
     private final CompanyService companyService;
 
     public List<PredictionDto> getPredictionHistory(String ticker) {
-        companyService.getById(ticker);
-        return predictionRepository.findAllById_CompanyTickerOrderById_PredictionDateDesc(ticker).stream()
+        Company company = companyService.getById(ticker);
+        return predictionRepository.findAllById_Company(company).stream()
                 .map(PredictionDto::from)
                 .toList();
     }

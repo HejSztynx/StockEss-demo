@@ -3603,10 +3603,370 @@
         {
             "date": "2025-10-20",
             "price": 27.91,
-            "prediction1m": 0.0,
-            "prediction3m": 0.0,
-            "prediction6m": 0.0,
-            "prediction1y": 0.0
+            "prediction1m": 30.89,
+            "prediction3m": 34.54,
+            "prediction6m": 47.36,
+            "prediction1y": 37.6
+        },
+        {
+            "date": "2025-10-21",
+            "price": 28.0,
+            "prediction1m": 31.56,
+            "prediction3m": 34.72,
+            "prediction6m": 47.57,
+            "prediction1y": 37.95
+        },
+        {
+            "date": "2025-10-22",
+            "price": 28.32,
+            "prediction1m": 31.92,
+            "prediction3m": 35.11,
+            "prediction6m": 48.12,
+            "prediction1y": 38.38
+        },
+        {
+            "date": "2025-10-23",
+            "price": 29.02,
+            "prediction1m": 33.2,
+            "prediction3m": 36.07,
+            "prediction6m": 49.38,
+            "prediction1y": 39.55
+        },
+        {
+            "date": "2025-10-24",
+            "price": 28.21,
+            "prediction1m": 31.91,
+            "prediction3m": 34.8,
+            "prediction6m": 47.76,
+            "prediction1y": 38.16
+        },
+        {
+            "date": "2025-10-27",
+            "price": 27.68,
+            "prediction1m": 30.72,
+            "prediction3m": 34.14,
+            "prediction6m": 46.88,
+            "prediction1y": 37.25
+        },
+        {
+            "date": "2025-10-28",
+            "price": 28.88,
+            "prediction1m": 31.03,
+            "prediction3m": 35.66,
+            "prediction6m": 48.93,
+            "prediction1y": 38.54
+        },
+        {
+            "date": "2025-10-29",
+            "price": 28.31,
+            "prediction1m": 30.22,
+            "prediction3m": 35.01,
+            "prediction6m": 48.02,
+            "prediction1y": 37.75
+        },
+        {
+            "date": "2025-10-30",
+            "price": 28.2,
+            "prediction1m": 29.87,
+            "prediction3m": 34.86,
+            "prediction6m": 47.83,
+            "prediction1y": 37.52
+        },
+        {
+            "date": "2025-10-31",
+            "price": 27.82,
+            "prediction1m": 29.54,
+            "prediction3m": 34.39,
+            "prediction6m": 47.18,
+            "prediction1y": 37.04
+        },
+        {
+            "date": "2025-11-03",
+            "price": 27.65,
+            "prediction1m": 29.56,
+            "prediction3m": 34.21,
+            "prediction6m": 46.92,
+            "prediction1y": 36.9
+        },
+        {
+            "date": "2025-11-04",
+            "price": 27.5,
+            "prediction1m": 30.05,
+            "prediction3m": 34.03,
+            "prediction6m": 46.67,
+            "prediction1y": 36.92
+        },
+        {
+            "date": "2025-11-05",
+            "price": 27.53,
+            "prediction1m": 30.45,
+            "prediction3m": 34.17,
+            "prediction6m": 46.81,
+            "prediction1y": 37.14
+        },
+        {
+            "date": "2025-11-06",
+            "price": 27.67,
+            "prediction1m": 31.02,
+            "prediction3m": 34.32,
+            "prediction6m": 47.02,
+            "prediction1y": 37.45
+        },
+        {
+            "date": "2025-11-07",
+            "price": 28.0,
+            "prediction1m": 31.35,
+            "prediction3m": 34.78,
+            "prediction6m": 47.63,
+            "prediction1y": 37.92
+        },
+        {
+            "date": "2025-11-10",
+            "price": 28.45,
+            "prediction1m": 31.68,
+            "prediction3m": 35.24,
+            "prediction6m": 48.29,
+            "prediction1y": 38.4
+        },
+        {
+            "date": "2025-11-12",
+            "price": 28.6,
+            "prediction1m": 31.54,
+            "prediction3m": 37.62,
+            "prediction6m": 49.91,
+            "prediction1y": 39.69
+        },
+        {
+            "date": "2025-11-13",
+            "price": 27.35,
+            "prediction1m": 30.17,
+            "prediction3m": 36.25,
+            "prediction6m": 47.94,
+            "prediction1y": 38.12
+        },
+        {
+            "date": "2025-11-14",
+            "price": 27.25,
+            "prediction1m": 29.6,
+            "prediction3m": 36.14,
+            "prediction6m": 47.75,
+            "prediction1y": 37.83
+        },
+        {
+            "date": "2025-11-17",
+            "price": 26.96,
+            "prediction1m": 29.53,
+            "prediction3m": 35.64,
+            "prediction6m": 47.17,
+            "prediction1y": 37.45
+        },
+        {
+            "date": "2025-11-18",
+            "price": 26.54,
+            "prediction1m": 29.43,
+            "prediction3m": 35.39,
+            "prediction6m": 46.65,
+            "prediction1y": 37.16
+        },
+        {
+            "date": "2025-11-19",
+            "price": 26.83,
+            "prediction1m": 29.43,
+            "prediction3m": 35.59,
+            "prediction6m": 47.01,
+            "prediction1y": 37.34
+        },
+        {
+            "date": "2025-11-20",
+            "price": 26.59,
+            "prediction1m": 29.16,
+            "prediction3m": 35.27,
+            "prediction6m": 46.59,
+            "prediction1y": 37.01
+        },
+        {
+            "date": "2025-11-21",
+            "price": 26.76,
+            "prediction1m": 29.77,
+            "prediction3m": 35.6,
+            "prediction6m": 46.96,
+            "prediction1y": 37.44
+        },
+        {
+            "date": "2025-11-24",
+            "price": 26.93,
+            "prediction1m": 30.18,
+            "prediction3m": 36.1,
+            "prediction6m": 47.47,
+            "prediction1y": 37.92
+        },
+        {
+            "date": "2025-11-25",
+            "price": 27.91,
+            "prediction1m": 30.91,
+            "prediction3m": 36.99,
+            "prediction6m": 48.87,
+            "prediction1y": 38.92
+        },
+        {
+            "date": "2025-11-26",
+            "price": 27.52,
+            "prediction1m": 30.41,
+            "prediction3m": 36.52,
+            "prediction6m": 48.25,
+            "prediction1y": 38.39
+        },
+        {
+            "date": "2025-11-27",
+            "price": 27.49,
+            "prediction1m": 30.38,
+            "prediction3m": 36.48,
+            "prediction6m": 48.2,
+            "prediction1y": 38.35
+        },
+        {
+            "date": "2025-11-28",
+            "price": 26.77,
+            "prediction1m": 29.63,
+            "prediction3m": 35.47,
+            "prediction6m": 46.9,
+            "prediction1y": 37.33
+        },
+        {
+            "date": "2025-12-01",
+            "price": 26.53,
+            "prediction1m": 29.42,
+            "prediction3m": 35.24,
+            "prediction6m": 46.54,
+            "prediction1y": 37.07
+        },
+        {
+            "date": "2025-12-02",
+            "price": 26.61,
+            "prediction1m": 29.6,
+            "prediction3m": 35.48,
+            "prediction6m": 46.76,
+            "prediction1y": 37.28
+        },
+        {
+            "date": "2025-12-03",
+            "price": 26.98,
+            "prediction1m": 30.01,
+            "prediction3m": 35.97,
+            "prediction6m": 47.41,
+            "prediction1y": 37.8
+        },
+        {
+            "date": "2025-12-04",
+            "price": 27.85,
+            "prediction1m": 30.48,
+            "prediction3m": 37.05,
+            "prediction6m": 48.86,
+            "prediction1y": 38.8
+        },
+        {
+            "date": "2025-12-05",
+            "price": 28.02,
+            "prediction1m": 30.73,
+            "prediction3m": 37.1,
+            "prediction6m": 49.06,
+            "prediction1y": 38.96
+        },
+        {
+            "date": "2025-12-08",
+            "price": 27.64,
+            "prediction1m": 30.72,
+            "prediction3m": 36.73,
+            "prediction6m": 48.51,
+            "prediction1y": 38.65
+        },
+        {
+            "date": "2025-12-09",
+            "price": 27.99,
+            "prediction1m": 30.8,
+            "prediction3m": 37.17,
+            "prediction6m": 49.08,
+            "prediction1y": 39.02
+        },
+        {
+            "date": "2025-12-10",
+            "price": 27.85,
+            "prediction1m": 25.41,
+            "prediction3m": 37.16,
+            "prediction6m": 41.55,
+            "prediction1y": 34.71
+        },
+        {
+            "date": "2025-12-11",
+            "price": 28.55,
+            "prediction1m": 25.58,
+            "prediction3m": 38.16,
+            "prediction6m": 42.62,
+            "prediction1y": 35.45
+        },
+        {
+            "date": "2025-12-12",
+            "price": 29.25,
+            "prediction1m": 25.87,
+            "prediction3m": 38.93,
+            "prediction6m": 43.55,
+            "prediction1y": 36.12
+        },
+        {
+            "date": "2025-12-15",
+            "price": 29.57,
+            "prediction1m": 26.58,
+            "prediction3m": 39.1,
+            "prediction6m": 43.86,
+            "prediction1y": 36.51
+        },
+        {
+            "date": "2025-12-16",
+            "price": 28.98,
+            "prediction1m": 26.71,
+            "prediction3m": 38.06,
+            "prediction6m": 42.85,
+            "prediction1y": 35.87
+        },
+        {
+            "date": "2025-12-17",
+            "price": 27.62,
+            "prediction1m": 25.23,
+            "prediction3m": 36.9,
+            "prediction6m": 41.23,
+            "prediction1y": 34.45
+        },
+        {
+            "date": "2025-12-18",
+            "price": 28.31,
+            "prediction1m": 25.86,
+            "prediction3m": 37.82,
+            "prediction6m": 42.26,
+            "prediction1y": 35.31
+        },
+        {
+            "date": "2025-12-19",
+            "price": 28.11,
+            "prediction1m": 25.4,
+            "prediction3m": 37.8,
+            "prediction6m": 42.14,
+            "prediction1y": 35.11
+        },
+        {
+            "date": "2025-12-22",
+            "price": 29.52,
+            "prediction1m": 25.68,
+            "prediction3m": 39.28,
+            "prediction6m": 43.91,
+            "prediction1y": 36.29
+        },
+        {
+            "date": "2025-12-23",
+            "price": 29.7,
+            "prediction1m": 25.83,
+            "prediction3m": 39.52,
+            "prediction6m": 44.18,
+            "prediction1y": 36.51
         }
     ],
     "oldUpdates": [
@@ -6766,6 +7126,321 @@
             "oldDate6m": "2025-04-10",
             "oldDate1y": "2024-10-02",
             "realPrice": 27.91
+        },
+        {
+            "oldDate1m": "2025-09-19",
+            "oldDate3m": "2025-07-18",
+            "oldDate6m": "2025-04-11",
+            "oldDate1y": "2024-10-03",
+            "realPrice": 28.0
+        },
+        {
+            "oldDate1m": "2025-09-22",
+            "oldDate3m": "2025-07-21",
+            "oldDate6m": "2025-04-14",
+            "oldDate1y": "2024-10-04",
+            "realPrice": 28.32
+        },
+        {
+            "oldDate1m": "2025-09-23",
+            "oldDate3m": "2025-07-22",
+            "oldDate6m": "2025-04-15",
+            "oldDate1y": "2024-10-07",
+            "realPrice": 29.02
+        },
+        {
+            "oldDate1m": "2025-09-24",
+            "oldDate3m": "2025-07-23",
+            "oldDate6m": "2025-04-16",
+            "oldDate1y": "2024-10-08",
+            "realPrice": 28.21
+        },
+        {
+            "oldDate1m": "2025-09-25",
+            "oldDate3m": "2025-07-24",
+            "oldDate6m": "2025-04-17",
+            "oldDate1y": "2024-10-09",
+            "realPrice": 27.68
+        },
+        {
+            "oldDate1m": "2025-09-26",
+            "oldDate3m": "2025-07-25",
+            "oldDate6m": "2025-04-22",
+            "oldDate1y": "2024-10-10",
+            "realPrice": 28.88
+        },
+        {
+            "oldDate1m": "2025-09-29",
+            "oldDate3m": "2025-07-28",
+            "oldDate6m": "2025-04-23",
+            "oldDate1y": "2024-10-11",
+            "realPrice": 28.31
+        },
+        {
+            "oldDate1m": "2025-09-30",
+            "oldDate3m": "2025-07-29",
+            "oldDate6m": "2025-04-24",
+            "oldDate1y": "2024-10-14",
+            "realPrice": 28.2
+        },
+        {
+            "oldDate1m": "2025-10-01",
+            "oldDate3m": "2025-07-30",
+            "oldDate6m": "2025-04-25",
+            "oldDate1y": "2024-10-15",
+            "realPrice": 27.82
+        },
+        {
+            "oldDate1m": "2025-10-02",
+            "oldDate3m": "2025-07-31",
+            "oldDate6m": "2025-04-28",
+            "oldDate1y": "2024-10-16",
+            "realPrice": 27.65
+        },
+        {
+            "oldDate1m": "2025-10-03",
+            "oldDate3m": "2025-08-01",
+            "oldDate6m": "2025-04-29",
+            "oldDate1y": "2024-10-17",
+            "realPrice": 27.5
+        },
+        {
+            "oldDate1m": "2025-10-06",
+            "oldDate3m": "2025-08-04",
+            "oldDate6m": "2025-04-30",
+            "oldDate1y": "2024-10-18",
+            "realPrice": 27.53
+        },
+        {
+            "oldDate1m": "2025-10-07",
+            "oldDate3m": "2025-08-05",
+            "oldDate6m": "2025-05-02",
+            "oldDate1y": "2024-10-21",
+            "realPrice": 27.67
+        },
+        {
+            "oldDate1m": "2025-10-08",
+            "oldDate3m": "2025-08-06",
+            "oldDate6m": "2025-05-05",
+            "oldDate1y": "2024-10-22",
+            "realPrice": 28.0
+        },
+        {
+            "oldDate1m": "2025-10-09",
+            "oldDate3m": "2025-08-07",
+            "oldDate6m": "2025-05-06",
+            "oldDate1y": "2024-10-23",
+            "realPrice": 28.45
+        },
+        {
+            "oldDate1m": "2025-10-10",
+            "oldDate3m": "2025-08-08",
+            "oldDate6m": "2025-05-07",
+            "oldDate1y": "2024-10-24",
+            "realPrice": 28.6
+        },
+        {
+            "oldDate1m": "2025-10-13",
+            "oldDate3m": "2025-08-11",
+            "oldDate6m": "2025-05-08",
+            "oldDate1y": "2024-10-25",
+            "realPrice": 27.35
+        },
+        {
+            "oldDate1m": "2025-10-14",
+            "oldDate3m": "2025-08-12",
+            "oldDate6m": "2025-05-09",
+            "oldDate1y": "2024-10-28",
+            "realPrice": 27.25
+        },
+        {
+            "oldDate1m": "2025-10-15",
+            "oldDate3m": "2025-08-13",
+            "oldDate6m": "2025-05-12",
+            "oldDate1y": "2024-10-29",
+            "realPrice": 26.96
+        },
+        {
+            "oldDate1m": "2025-10-16",
+            "oldDate3m": "2025-08-14",
+            "oldDate6m": "2025-05-13",
+            "oldDate1y": "2024-10-30",
+            "realPrice": 26.54
+        },
+        {
+            "oldDate1m": "2025-10-17",
+            "oldDate3m": "2025-08-18",
+            "oldDate6m": "2025-05-14",
+            "oldDate1y": "2024-10-31",
+            "realPrice": 26.83
+        },
+        {
+            "oldDate1m": "2025-10-20",
+            "oldDate3m": "2025-08-19",
+            "oldDate6m": "2025-05-15",
+            "oldDate1y": "2024-11-04",
+            "realPrice": 26.59
+        },
+        {
+            "oldDate1m": "2025-10-21",
+            "oldDate3m": "2025-08-20",
+            "oldDate6m": "2025-05-16",
+            "oldDate1y": "2024-11-05",
+            "realPrice": 26.76
+        },
+        {
+            "oldDate1m": "2025-10-22",
+            "oldDate3m": "2025-08-21",
+            "oldDate6m": "2025-05-19",
+            "oldDate1y": "2024-11-06",
+            "realPrice": 26.93
+        },
+        {
+            "oldDate1m": "2025-10-23",
+            "oldDate3m": "2025-08-22",
+            "oldDate6m": "2025-05-20",
+            "oldDate1y": "2024-11-07",
+            "realPrice": 27.91
+        },
+        {
+            "oldDate1m": "2025-10-24",
+            "oldDate3m": "2025-08-25",
+            "oldDate6m": "2025-05-21",
+            "oldDate1y": "2024-11-08",
+            "realPrice": 27.52
+        },
+        {
+            "oldDate1m": "2025-10-27",
+            "oldDate3m": "2025-08-26",
+            "oldDate6m": "2025-05-22",
+            "oldDate1y": "2024-11-12",
+            "realPrice": 27.49
+        },
+        {
+            "oldDate1m": "2025-10-28",
+            "oldDate3m": "2025-08-27",
+            "oldDate6m": "2025-05-23",
+            "oldDate1y": "2024-11-13",
+            "realPrice": 26.77
+        },
+        {
+            "oldDate1m": "2025-10-29",
+            "oldDate3m": "2025-08-28",
+            "oldDate6m": "2025-05-26",
+            "oldDate1y": "2024-11-14",
+            "realPrice": 26.53
+        },
+        {
+            "oldDate1m": "2025-10-30",
+            "oldDate3m": "2025-08-29",
+            "oldDate6m": "2025-05-27",
+            "oldDate1y": "2024-11-15",
+            "realPrice": 26.61
+        },
+        {
+            "oldDate1m": "2025-10-31",
+            "oldDate3m": "2025-09-01",
+            "oldDate6m": "2025-05-28",
+            "oldDate1y": "2024-11-18",
+            "realPrice": 26.98
+        },
+        {
+            "oldDate1m": "2025-11-03",
+            "oldDate3m": "2025-09-02",
+            "oldDate6m": "2025-05-29",
+            "oldDate1y": "2024-11-19",
+            "realPrice": 27.85
+        },
+        {
+            "oldDate1m": "2025-11-04",
+            "oldDate3m": "2025-09-03",
+            "oldDate6m": "2025-05-30",
+            "oldDate1y": "2024-11-20",
+            "realPrice": 28.02
+        },
+        {
+            "oldDate1m": "2025-11-05",
+            "oldDate3m": "2025-09-04",
+            "oldDate6m": "2025-06-02",
+            "oldDate1y": "2024-11-21",
+            "realPrice": 27.64
+        },
+        {
+            "oldDate1m": "2025-11-06",
+            "oldDate3m": "2025-09-05",
+            "oldDate6m": "2025-06-03",
+            "oldDate1y": "2024-11-22",
+            "realPrice": 27.99
+        },
+        {
+            "oldDate1m": "2025-11-07",
+            "oldDate3m": "2025-09-08",
+            "oldDate6m": "2025-06-04",
+            "oldDate1y": "2024-11-25",
+            "realPrice": 27.85
+        },
+        {
+            "oldDate1m": "2025-11-10",
+            "oldDate3m": "2025-09-09",
+            "oldDate6m": "2025-06-05",
+            "oldDate1y": "2024-11-26",
+            "realPrice": 28.55
+        },
+        {
+            "oldDate1m": "2025-11-12",
+            "oldDate3m": "2025-09-10",
+            "oldDate6m": "2025-06-06",
+            "oldDate1y": "2024-11-27",
+            "realPrice": 29.25
+        },
+        {
+            "oldDate1m": "2025-11-13",
+            "oldDate3m": "2025-09-11",
+            "oldDate6m": "2025-06-09",
+            "oldDate1y": "2024-11-28",
+            "realPrice": 29.57
+        },
+        {
+            "oldDate1m": "2025-11-14",
+            "oldDate3m": "2025-09-12",
+            "oldDate6m": "2025-06-10",
+            "oldDate1y": "2024-11-29",
+            "realPrice": 28.98
+        },
+        {
+            "oldDate1m": "2025-11-17",
+            "oldDate3m": "2025-09-15",
+            "oldDate6m": "2025-06-11",
+            "oldDate1y": "2024-12-02",
+            "realPrice": 27.62
+        },
+        {
+            "oldDate1m": "2025-11-18",
+            "oldDate3m": "2025-09-16",
+            "oldDate6m": "2025-06-12",
+            "oldDate1y": "2024-12-03",
+            "realPrice": 28.31
+        },
+        {
+            "oldDate1m": "2025-11-19",
+            "oldDate3m": "2025-09-17",
+            "oldDate6m": "2025-06-13",
+            "oldDate1y": "2024-12-04",
+            "realPrice": 28.11
+        },
+        {
+            "oldDate1m": "2025-11-20",
+            "oldDate3m": "2025-09-18",
+            "oldDate6m": "2025-06-16",
+            "oldDate1y": "2024-12-05",
+            "realPrice": 29.52
+        },
+        {
+            "oldDate1m": "2025-11-21",
+            "oldDate3m": "2025-09-19",
+            "oldDate6m": "2025-06-17",
+            "oldDate1y": "2024-12-06",
+            "realPrice": 29.7
         }
     ]
 }

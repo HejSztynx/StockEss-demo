@@ -5,11 +5,9 @@ import LoginScreen from "@/components/Auth/LoginScreen";
 import { useEffect } from "react";
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
-  const { isLoggedIn, openLoginModal  } = useAuth();
+  const { isLoggedIn } = useAuth();
 
-  useEffect(() => {
-
-  }, [isLoggedIn])
+  useEffect(() => {}, [isLoggedIn]);
 
   if (!isLoggedIn) {
     return <LoginScreen />;

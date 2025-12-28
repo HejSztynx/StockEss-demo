@@ -48,7 +48,7 @@ public class WalletService {
         User user = userAuthService.getAuthenticatedUser();
         Wallet wallet = walletRepository.findById(walletId).orElseThrow(NoWalletFoundException::new);
 
-        userAuthService.authenticateUsersAccess(user, wallet);
+        userAuthService.authenticateUsersAccess(wallet);
         user.removeWallet(wallet);
 
         walletRepository.delete(wallet);

@@ -1,4 +1,4 @@
-package com.example.stockess.util;
+package com.example.stockess.configuration.security.util;
 
 import jakarta.servlet.http.Cookie;
 import org.springframework.stereotype.Component;

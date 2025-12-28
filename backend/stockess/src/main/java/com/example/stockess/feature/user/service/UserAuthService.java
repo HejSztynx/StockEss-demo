@@ -22,7 +22,8 @@ public class UserAuthService {
         return userService.getUserByEmail(email);
     }
 
-    public void authenticateUsersAccess(User user, UserAccessible accessible) {
+    public void authenticateUsersAccess(UserAccessible accessible) {
+        User user = getAuthenticatedUser();
         if (!accessible.getUser().equals(user)) {
             throw new ForbiddenAccessException(String.format("You don't have the access to this %s!", accessible.format()));
         }

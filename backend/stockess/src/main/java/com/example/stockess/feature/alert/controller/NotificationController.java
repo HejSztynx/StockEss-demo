@@ -5,13 +5,12 @@ import com.example.stockess.feature.alert.service.NotificationService;
 import com.example.stockess.feature.util.response.SuccessResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/notification")
 public class NotificationController {
 

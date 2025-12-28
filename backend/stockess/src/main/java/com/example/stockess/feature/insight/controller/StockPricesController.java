@@ -24,13 +24,13 @@ public class StockPricesController {
 
     @GetMapping()
     public ResponseEntity<PriceHistoryDto> getStockPricesData(@RequestParam("ticker") String ticker) {
-        PriceHistoryDto priceHistoryDto = stockPricesService.fetchStockPricesData(ticker);
+        PriceHistoryDto priceHistoryDto = stockPricesService.getStockPricesData(ticker);
         return ResponseEntity.ok(priceHistoryDto);
     }
 
     @GetMapping("/current")
     public ResponseEntity<CurrentPricesDto> getCurrentPrices() {
-        CurrentPricesDto currentPricesDto = stockPricesService.fetchCurrentStockPrices();
+        CurrentPricesDto currentPricesDto = stockPricesService.getCurrentStockPrices();
         return ResponseEntity.ok(currentPricesDto);
     }
 }

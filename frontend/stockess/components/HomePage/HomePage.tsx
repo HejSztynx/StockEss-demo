@@ -5,20 +5,13 @@ import Sidebar from "@/components/Common/Sidebar";
 import WelcomeScreen from "@/components/Common/WelcomeScreen";
 import CompanyDetailsView from "@/components/Common/CompanyDetailsView";
 import { CompanyContext } from "@/context/CompanyContext";
-import { useAuth } from "@/context/AuthContext";
 import { useHomePageService } from "./HomePageService";
 import AuthModals from "../Auth/AuthModals";
+import AuthGuard from "../Auth/AuthGuard";
 
 const HomePage = () => {
   /* -------------------------------------------------- */
-  /* ▸ 1. AUTH CONTEXT                                  */
-  /* -------------------------------------------------- */
-  const {
-    isLoggedIn,
-  } = useAuth();
-
-  /* -------------------------------------------------- */
-  /* ▸ 2. PAGE LOGIC (custom hook)                      */
+  /* ▸ 1. PAGE LOGIC (custom hook)                      */
   /* -------------------------------------------------- */
   const {
     /* data */
@@ -28,24 +21,26 @@ const HomePage = () => {
     predictionData,
     predictionPrices,
     currentPrice,
-    oldestPrice,
+    minPrice,
     selectedPredictionRange,
     selectedMonth,
     selectedYear,
     /* handlers */
+    setSelectedCompany,
     setActiveTab,
     setSelectedPredictionRange,
     setSelectedMonth,
     setSelectedYear,
     handleSelectCompany,
+    setMinPrice,
   } = useHomePageService();
 
   /* -------------------------------------------------- */
-  /* ▸ 3. RENDER                                        */
+  /* ▸ 2. RENDER                                        */
   /* -------------------------------------------------- */
   return (
     <>
-      <AuthModals/>
+      <AuthModals />
 
       <div className="flex flex-col h-screen">
         <NavBar />
@@ -53,33 +48,36 @@ const HomePage = () => {
         <div className="flex flex-1">
           <Sidebar
             selectedCompany={selectedCompany}
+            setSelectedCompany={setSelectedCompany}
             onSelectCompany={handleSelectCompany}
           />
 
           <div className="flex-1 p-2 overflow-y-auto">
             {selectedCompany ? (
-              <CompanyContext.Provider
-                value={{
-                  selectedCompany,
-                  currentPrice,
-                  oldestPrice,
-                  predictionPrices,
-                  predictionData,
-                  OHLCHistory: ohlcHistory,
-                  selectedPredictionRange,
-                  setSelectedPredictionRange,
-                  selectedMonth,
-                  setSelectedMonth,
-                  selectedYear,
-                  setSelectedYear,
-                }}
-              >
-                <CompanyDetailsView
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                  isLoggedIn={isLoggedIn}
-                />
-              </CompanyContext.Provider>
+              <AuthGuard>
+                <CompanyContext.Provider
+                  value={{
+                    selectedCompany,
+                    currentPrice,
+                    minPrice,
+                    predictionPrices,
+                    predictionData,
+                    OHLCHistory: ohlcHistory,
+                    selectedPredictionRange,
+                    setSelectedPredictionRange,
+                    selectedMonth,
+                    setSelectedMonth,
+                    selectedYear,
+                    setSelectedYear,
+                    setMinPrice,
+                  }}
+                >
+                  <CompanyDetailsView
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                  />
+                </CompanyContext.Provider>
+              </AuthGuard>
             ) : (
               <WelcomeScreen />
             )}

@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 interface CompanyContextProps {
     selectedCompany: string | null;
     currentPrice: number | null;
-    oldestPrice: number | null;
+    minPrice: number | null;
     predictionPrices: {
         m1: number | null;
         m3: number | null;
@@ -18,6 +18,7 @@ interface CompanyContextProps {
     setSelectedMonth: (month: number | null) => void;
     selectedYear: number | null;
     setSelectedYear: (year: number | null) => void;
+    setMinPrice: (price: number | null) => void;
 }
 
 export const CompanyContext = createContext<CompanyContextProps | undefined>(undefined);

@@ -1,29 +1,34 @@
 "use client";
 
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { loginUser, registerUser } from "./AuthService";
 
-interface AuthModalProps { 
-  isOpen: boolean,
-  onLogIn: () => void,
-  onClose: () => void,
-  mode: "login" | "register" 
+interface AuthModalProps {
+  isOpen: boolean;
+  onLogIn: () => void;
+  onClose: () => void;
+  mode: "login" | "register";
 }
 
-export default function AuthModal({ isOpen, onClose, onLogIn, mode }: AuthModalProps) {
+export default function AuthModal({
+  isOpen,
+  onClose,
+  onLogIn,
+  mode,
+}: AuthModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   useEffect(() => {
-      if (isOpen) {
-        setEmail("");
-        setPassword("");
-        setMessage(null);
-      }
-    }, [isOpen]);
+    if (isOpen) {
+      setEmail("");
+      setPassword("");
+      setMessage(null);
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +62,9 @@ export default function AuthModal({ isOpen, onClose, onLogIn, mode }: AuthModalP
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel className="w-full max-w-sm rounded bg-white p-6 shadow-lg">
-          <DialogTitle className="text-lg font-semibold mb-4">{mode === "login" ? "Logowanie" : "Rejestracja"}</DialogTitle>
+          <DialogTitle className="text-lg font-semibold mb-4">
+            {mode === "login" ? "Sign in" : "Sign up"}
+          </DialogTitle>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="email"
@@ -69,17 +76,22 @@ export default function AuthModal({ isOpen, onClose, onLogIn, mode }: AuthModalP
             />
             <input
               type="password"
-              placeholder="Hasło"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border p-2 rounded"
               required
             />
-            <p className={`${isSuccess ? "text-green-600" : "text-red-500"} text-center self-center`}>
+            <p
+              className={`${isSuccess ? "text-green-600" : "text-red-500"} text-center self-center`}
+            >
               {message || "\u00A0"}
             </p>
-            <button type="submit" className="w-full bg-black text-white py-2 rounded-2xl">
-              {mode === "login" ? "Zaloguj się" : "Zarejestruj się"}
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-2 rounded-2xl"
+            >
+              {mode === "login" ? "Sign in" : "Sign up"}
             </button>
           </form>
         </DialogPanel>

@@ -11,4 +11,5 @@ public class WalletDto {
     private String description;
     private LocalDate createdAt;
     private Double totalProfit;
+    private Double profitPercent;
 }

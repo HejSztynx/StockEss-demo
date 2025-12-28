@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Prediction {
 
     @EmbeddedId
-    private PredictionId id;
+    private CompanyDateId id;
 
     @Column(nullable = false)
     private Double pastPrice;

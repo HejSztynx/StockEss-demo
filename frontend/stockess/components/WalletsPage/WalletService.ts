@@ -6,6 +6,7 @@ export interface Wallet {
   name: string;
   description: string;
   totalProfit: number;
+  profitPercent: number;
 }
 
 export interface StockPosition {

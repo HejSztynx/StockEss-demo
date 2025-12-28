@@ -33,9 +33,8 @@ public class StockEntryService {
     private final StockEntryMapper stockEntryMapper;
 
     public List<StockEntryDto> getAll(Long walletId) {
-        User user = userAuthService.getAuthenticatedUser();
         Wallet wallet = walletService.getWalletById(walletId);
-        userAuthService.authenticateUsersAccess(user, wallet);
+        userAuthService.authenticateUsersAccess(wallet);
 
         return wallet.getStockEntries().stream()
                 .map(stockEntryMapper::toStockEntryDto)
@@ -43,11 +42,10 @@ public class StockEntryService {
     }
 
     public void addEntry(AddStockEntryRequest addStockEntryRequest) {
-        User user = userAuthService.getAuthenticatedUser();
         Wallet wallet = walletService.getWalletById(addStockEntryRequest.getWalletId());
         BaseStockEntryRequest data = addStockEntryRequest.getData();
         Company company = companyService.getById(data.getCompany());
-        userAuthService.authenticateUsersAccess(user, wallet);
+        userAuthService.authenticateUsersAccess(wallet);
 
         StockEntry stockEntry = stockEntryMapper.toStockEntry(data, company);
         wallet.addEntry(stockEntry);
@@ -55,21 +53,19 @@ public class StockEntryService {
     }
 
     public void closePosition(CloseStockEntryRequest closeStockEntryRequest) {
-        User user = userAuthService.getAuthenticatedUser();
         StockEntry stockEntry = stockEntryRepository.findById(closeStockEntryRequest.getId()).orElseThrow(NoStockEntryFoundException::new);
         Wallet wallet = stockEntry.getWallet();
-        userAuthService.authenticateUsersAccess(user, wallet);
+        userAuthService.authenticateUsersAccess(wallet);
 
         stockEntry.closePosition(closeStockEntryRequest);
         stockEntryRepository.save(stockEntry);
     }
 
     public void editEntry(EditStockEntryRequest editStockEntryRequest) {
-        User user = userAuthService.getAuthenticatedUser();
         StockEntry stockEntry = stockEntryRepository.findById(editStockEntryRequest.getId()).orElseThrow(NoStockEntryFoundException::new);
         BaseStockEntryRequest data = editStockEntryRequest.getData();
         Wallet wallet = stockEntry.getWallet();
-        userAuthService.authenticateUsersAccess(user, wallet);
+        userAuthService.authenticateUsersAccess( wallet);
         String companyId = data.getCompany();
         Company company = companyService.getById(companyId);
 
@@ -78,10 +74,9 @@ public class StockEntryService {
     }
 
     public void deleteEntry(Long stockEntryId) {
-        User user = userAuthService.getAuthenticatedUser();
         StockEntry stockEntry = stockEntryRepository.findById(stockEntryId).orElseThrow(NoStockEntryFoundException::new);
         Wallet wallet = stockEntry.getWallet();
-        userAuthService.authenticateUsersAccess(user, wallet);
+        userAuthService.authenticateUsersAccess(wallet);
 
         stockEntryRepository.delete(stockEntry);
     }

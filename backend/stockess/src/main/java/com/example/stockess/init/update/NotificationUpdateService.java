@@ -1,13 +1,13 @@
 package com.example.stockess.init.update;
 
-import com.example.stockess.external.stockapi.StockAPIClient;
 import com.example.stockess.feature.alert.model.util.AlertMessageGenerator;
 import com.example.stockess.feature.alert.service.AlertService;
 import com.example.stockess.feature.alert.service.ConditionService;
 import com.example.stockess.feature.alert.service.NotificationService;
 import com.example.stockess.feature.company.model.Company;
 import com.example.stockess.feature.insight.model.dto.PriceHistoryDto;
-import com.example.stockess.feature.insight.repository.PredictionRepository;
+import com.example.stockess.feature.insight.repository.PriceRepository;
+import com.example.stockess.feature.insight.service.StockPricesService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,12 +24,12 @@ public class NotificationUpdateService {
     private final AlertService alertService;
     private final NotificationService notificationService;
     private final ConditionService conditionService;
-    private final StockAPIClient apiClient;
-    private final PredictionRepository predictionRepository;
+    private final StockPricesService stockPricesService;
     private final AlertMessageGenerator alertMessageGenerator;
+    private final PriceRepository priceRepository;
 
     public void runUpdate(LocalDate lastKnownDate) {
-        LocalDate latestKnownDate = predictionRepository.findLatestPredictionDate().orElse(UpdateService.INITIAL_DATE);
+        LocalDate latestKnownDate = priceRepository.findLatestPriceDate().orElse(UpdateService.INITIAL_PRICE_DATE);
         checkAlerts(lastKnownDate, latestKnownDate);
     }
 
@@ -42,9 +42,9 @@ public class NotificationUpdateService {
                 .forEach(alert -> {
                     outerLoop:
                     for (Company company : alert.getCompanies()) {
-                        PriceHistoryDto history = apiClient.fetchStockPricesData(company.getId());
+                        PriceHistoryDto history = stockPricesService.getStockPricesData(company.getId());
                         for (LocalDate day : daysToCheck) {
-                            Optional<List<String>> result = conditionService.evaluateConditions(alert, history, day);
+                            Optional<List<String>> result = conditionService.evaluateConditionsInPresent(alert, history, day);
                             if (result.isPresent()) {
                                 List<String> messages = result.get();
                                 String generatedMessage = alertMessageGenerator.generate(company, day, messages);
@@ -56,7 +56,7 @@ public class NotificationUpdateService {
                             }
                         }
                     }
-
                 });
+        System.out.println("Updated notifications");
     }
 }

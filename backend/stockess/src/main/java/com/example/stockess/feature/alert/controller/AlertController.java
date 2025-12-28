@@ -7,13 +7,12 @@ import com.example.stockess.feature.util.response.SuccessResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @AllArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/alert")
 public class AlertController {
 

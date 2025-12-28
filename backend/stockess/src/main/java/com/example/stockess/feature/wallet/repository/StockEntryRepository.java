@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StockEntryRepository extends JpaRepository<StockEntry, Long> {
-//    List<StockEntry> findAllByWallet(Wallet wallet);
+
 }

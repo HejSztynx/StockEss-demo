@@ -1,6 +1,6 @@
 package com.example.stockess.configuration.security;
 
-import com.example.stockess.util.TokenCookieCreator;
+import com.example.stockess.configuration.security.util.TokenCookieCreator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

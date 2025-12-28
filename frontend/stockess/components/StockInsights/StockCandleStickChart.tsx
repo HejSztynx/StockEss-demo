@@ -2,89 +2,109 @@
 
 import { ApexOptions } from "apexcharts";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+import { useApexZoomEvents } from "./UseApexZoomEvents";
+import { Marker, OHLCChunk } from "./StockService";
 
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 interface StockCandleStickChartProps {
-  OHLCHistory: { date: string; open: number; high: number; low: number; close: number }[];
-  patternMarkersMap: Record<string, { name: string, height: number; color: string, signal: string }[]>;
+  OHLCHistory: OHLCChunk[];
+  markersMap: Record<string, Marker[]>;
+  setVisibleRange: (value: { min: string; max: string } | null) => void;
 }
-
 
 export default function StockCandleStickChart({
   OHLCHistory,
-  patternMarkersMap
+  markersMap,
+  setVisibleRange,
 }: StockCandleStickChartProps) {
-  const mockData = OHLCHistory.map(({ date, open, high, low, close }) => ({
-    x: date,
-    y: [open, high, low, close]
+  const isResettingZoom = useRef(false);
+  const zoomEvents = useApexZoomEvents({ isResettingZoom, setVisibleRange });
+
+  const priceData = OHLCHistory.map(({ ohlc }) => ({
+    x: ohlc.date,
+    y: [ohlc.open, ohlc.high, ohlc.low, ohlc.close],
   }));
 
   const series = [
     {
-      data: mockData
-    }
+      data: priceData,
+    },
   ];
 
-  const minPrice = Math.min(...OHLCHistory.map(d => d.low));
-  const maxPrice = Math.max(...OHLCHistory.map(d => d.high));
+  const minPrice = Math.min(...OHLCHistory.map((d) => d.ohlc.low));
+  const maxPrice = Math.max(...OHLCHistory.map((d) => d.ohlc.high));
   const padding = (maxPrice - minPrice) * 0.3;
-  
+
   const options: ApexOptions = {
     chart: {
-      type: 'candlestick',
+      type: "candlestick",
       zoom: {
         enabled: true,
-        type: 'x',
-        autoScaleYaxis: true
+        type: "x",
+        autoScaleYaxis: true,
+        allowMouseWheelZoom: false,
+      },
+      events: zoomEvents,
+      toolbar: {
+        autoSelected: "zoom",
+        show: true,
+        tools: {
+          zoom: true,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: true,
+        },
       },
     },
     annotations: {
-      points: Object.entries(patternMarkersMap).flatMap(([date, markers]) =>
-        markers.map(({ height, color, signal }) => ({
+      points: Object.entries(markersMap).flatMap(([date, markers]) =>
+        markers.map(({ height, color, shape }) => ({
           x: date,
           y: height,
           marker: {
             size: 5,
             fillColor: color,
-            strokeColor: '#fff',
+            strokeColor: "#fff",
             radius: 2,
-            shape: signal === 'bullish' ? 'circle' : 'diamond'
+            shape: shape ? shape : "circle",
           },
           label: {
-            text: '',
+            text: "",
             style: {
-              color: '#fff',
+              color: "#fff",
               background: color,
-              fontSize: '10px'
-            }
-          }
-        }))
-      )
+              fontSize: "10px",
+            },
+          },
+        })),
+      ),
     },
     xaxis: {
       tickAmount: 6,
-      type: 'category',
+      type: "category",
       labels: {
-        rotate: 0
+        rotate: 0,
       },
       tooltip: {
-        enabled: true
-      }
+        enabled: true,
+      },
     },
     yaxis: {
       max: maxPrice + padding,
       tooltip: {
-        enabled: true
-      }
+        enabled: true,
+      },
     },
     tooltip: {
       shared: false,
-      custom: function({ seriesIndex, dataPointIndex, w }) {
+      custom: function ({ seriesIndex, dataPointIndex, w }) {
         const date = w.globals.categoryLabels[dataPointIndex];
         const ohlc = w.config.series[seriesIndex].data[dataPointIndex].y;
-        const patterns = patternMarkersMap[date];
+        const patterns = markersMap[date];
 
         const [open, high, low, close] = ohlc;
 
@@ -94,22 +114,35 @@ export default function StockCandleStickChart({
             <div class="font-medium">H: ${high} PLN</div>
             <div class="font-medium">L: ${low} PLN</div>
             <div class="font-medium">C: ${close} PLN</div>
-            ${patterns ? `
+            ${
+              patterns
+                ? `
               <div class="pt-1 space-y-0.5">
-                ${patterns.map(p => `
+                ${patterns
+                  .map(
+                    (p) => `
                   <div class="font-medium" style="color: ${p.color}">${p.name}</div>
-                `).join('')}
+                `,
+                  )
+                  .join("")}
               </div>
-            ` : ''}
+            `
+                : ""
+            }
           </div>
         `;
-      }
-    }
+      },
+    },
   };
 
   return (
     <div className="w-full h-full pt-0 px-6 pb-6">
-      <Chart options={options} series={series} type='candlestick' height="100%"/>
+      <Chart
+        options={options}
+        series={series}
+        type="candlestick"
+        height="100%"
+      />
     </div>
   );
 }

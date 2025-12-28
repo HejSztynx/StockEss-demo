@@ -1,8 +1,10 @@
 package com.example.stockess.init.update;
 
 import com.example.stockess.external.stockapi.StockAPIClient;
+import com.example.stockess.feature.company.model.Company;
+import com.example.stockess.feature.company.service.CompanyService;
 import com.example.stockess.feature.insight.model.Prediction;
-import com.example.stockess.feature.insight.model.PredictionId;
+import com.example.stockess.feature.insight.model.CompanyDateId;
 import com.example.stockess.feature.insight.model.dto.update.NewUpdateDto;
 import com.example.stockess.feature.insight.model.dto.update.OldUpdateDto;
 import com.example.stockess.feature.insight.model.dto.update.PredictionHistoryUpdateDto;
@@ -24,24 +26,28 @@ public class PredictionHistoryUpdateService {
 
     private final StockAPIClient stockAPIClient;
     private final PredictionRepository predictionRepository;
+    private final CompanyService companyService;
 
     public void runUpdate(LocalDate lastKnownDate) {
 //        LocalDate lastKnownDate = TEST_DATE;
-        System.out.println("Last date: " + lastKnownDate);
+        System.out.println("PREDICTION Last date: " + lastKnownDate);
 
         List<String> tickers = stockAPIClient.fetchTickers();
 
-        tickers.forEach(ticker -> {
+        for (int i = 0; i < tickers.size(); i++) {
+            String ticker = tickers.get(i);
             PredictionHistoryUpdateDto updateDto = stockAPIClient.fetchUpdate(ticker, lastKnownDate);
-            createNewPredictions(ticker, updateDto.newUpdates());
-            updateOldPredictions(ticker, updateDto.oldUpdates());
-            System.out.println("Updated db for ticker: " + ticker);
-        });
+            Company company = companyService.getById(ticker);
+            createNewPredictions(company, updateDto.newUpdates());
+            updateOldPredictions(company, updateDto.oldUpdates());
+            System.out.printf("(%d/%d) Updated predictions for ticker: %s%n",
+                    i + 1, tickers.size(), company.getId());
+        }
     }
 
-    private void createNewPredictions(String ticker, List<NewUpdateDto> newUpdates) {
+    private void createNewPredictions(Company company, List<NewUpdateDto> newUpdates) {
         List<Prediction> predictions = newUpdates.stream().map(newUpdate -> {
-            PredictionId id = new PredictionId(ticker, newUpdate.date());
+            CompanyDateId id = new CompanyDateId(company, newUpdate.date());
             Prediction prediction = new Prediction();
             prediction.setId(id);
             prediction.setPastPrice(newUpdate.price());
@@ -55,32 +61,32 @@ public class PredictionHistoryUpdateService {
         predictionRepository.saveAll(predictions);
     }
 
-    private void updateOldPredictions(String ticker, List<OldUpdateDto> oldUpdates) {
+    private void updateOldPredictions(Company company, List<OldUpdateDto> oldUpdates) {
         oldUpdates.forEach(oldUpdate -> {
             Double realPrice = oldUpdate.realPrice();
 
-            PredictionId id1m = new PredictionId(ticker, oldUpdate.oldDate1m());
+            CompanyDateId id1m = new CompanyDateId(company, oldUpdate.oldDate1m());
             predictionRepository.findById(id1m).ifPresent(prediction -> {
                 prediction.setRealPrice1m(realPrice);
                 prediction.setSurprise1m(calculateSurprise(prediction.getPrediction1m(), realPrice));
                 predictionRepository.save(prediction);
             });
 
-            PredictionId id3m = new PredictionId(ticker, oldUpdate.oldDate3m());
+            CompanyDateId id3m = new CompanyDateId(company, oldUpdate.oldDate3m());
             predictionRepository.findById(id3m).ifPresent(prediction -> {
                 prediction.setRealPrice3m(realPrice);
                 prediction.setSurprise3m(calculateSurprise(prediction.getPrediction3m(), realPrice));
                 predictionRepository.save(prediction);
             });
 
-            PredictionId id6m = new PredictionId(ticker, oldUpdate.oldDate6m());
+            CompanyDateId id6m = new CompanyDateId(company, oldUpdate.oldDate6m());
             predictionRepository.findById(id6m).ifPresent(prediction -> {
                 prediction.setRealPrice6m(realPrice);
                 prediction.setSurprise6m(calculateSurprise(prediction.getPrediction6m(), realPrice));
                 predictionRepository.save(prediction);
             });
 
-            PredictionId id1y = new PredictionId(ticker, oldUpdate.oldDate1y());
+            CompanyDateId id1y = new CompanyDateId(company, oldUpdate.oldDate1y());
             predictionRepository.findById(id1y).ifPresent(prediction -> {
                 prediction.setRealPrice1y(realPrice);
                 prediction.setSurprise1y(calculateSurprise(prediction.getPrediction1y(), realPrice));

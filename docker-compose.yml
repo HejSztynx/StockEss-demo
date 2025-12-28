@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -41,7 +41,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-     - gradle-cache:/home/gradle/.gradle
+      - gradle-cache:/home/gradle/.gradle
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/stockess
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}

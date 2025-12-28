@@ -6,7 +6,7 @@ import com.example.stockess.feature.authentication.exception.EmailAlreadyExistsE
 import com.example.stockess.feature.user.model.User;
 import com.example.stockess.feature.user.dto.response.UserDto;
 import com.example.stockess.feature.user.repository.UserRepository;
-import com.example.stockess.util.TokenCookieCreator;
+import com.example.stockess.configuration.security.util.TokenCookieCreator;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;

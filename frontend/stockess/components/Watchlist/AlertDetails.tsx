@@ -5,8 +5,11 @@ import { activateAlert, deactivateAlert, deleteAllNotifications, deleteNotificat
 import { format } from "date-fns";
 import { pl } from "date-fns/locale";
 import { DeleteAlertModal } from "./DeleteAlertModal";
+import AlertChartModal from "./AlertChartModal";
+import { useState } from "react";
 
 export default function AlertDetails() {
+    const [showChart, setShowChart] = useState(false);
     const {
         selectedAlert,
         setIsEditModalOpen,
@@ -117,6 +120,7 @@ export default function AlertDetails() {
                         >
                         {selectedAlert?.active ? "Deactivate" : "Activate"}
                         </Button>
+                        <Button onClick={() => setShowChart(true)}>Check the past on the chart</Button>
                     </div>
                 </div>
                 <Button onClick={handleOpenDeleteModal} variant={"destructive"}>Delete</Button>
@@ -188,6 +192,13 @@ export default function AlertDetails() {
                     )}
                 </div>
             </div>
+            {showChart && selectedAlert && (
+            <AlertChartModal
+                alertId={selectedAlert.id!}
+                companies={selectedAlert.companies}
+                onClose={() => setShowChart(false)}
+            />
+            )}
         </div>
     );
 }

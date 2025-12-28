@@ -16,13 +16,27 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ConditionService {
 
-    public Optional<List<String>> evaluateConditions(Alert alert, PriceHistoryDto history, LocalDate checkedDay) {
+    public Optional<List<String>> evaluateConditionsInPresent(Alert alert, PriceHistoryDto history, LocalDate checkedDay) {
         ConditionEvaluationContext context = new ConditionEvaluationContext(
                 history,
                 checkedDay,
                 alert.getStartDate()
         );
 
+        return evaluateConditions(alert, context);
+    }
+
+    public Optional<List<String>> evaluateConditionsInPast(Alert alert, PriceHistoryDto history, LocalDate checkedDay) {
+        ConditionEvaluationContext context = new ConditionEvaluationContext(
+                history,
+                checkedDay,
+                history.getOhlcHistory().getFirst().getDate()
+        );
+
+        return evaluateConditions(alert, context);
+    }
+
+    private static Optional<List<String>> evaluateConditions(Alert alert, ConditionEvaluationContext context) {
         List<String> messages = new ArrayList<>();
         for (BaseCondition condition : alert.getConditions()) {
             Optional<String> evaluated = condition.evaluate(context);

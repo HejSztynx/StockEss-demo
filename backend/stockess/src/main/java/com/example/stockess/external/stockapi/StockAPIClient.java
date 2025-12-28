@@ -36,14 +36,9 @@ public class StockAPIClient {
         return getResponseEntity(url).getStatusCode().value() == 200;
     }
 
-    public SinglePredictionDto fetchStockPricesPrediction(String ticker, String period) {
-        String url = apiProperties.getRootUrl() + "/predict?ticker=" + ticker + "&period=" + period;
-        ResponseEntity<SinglePredictionDto> response = getMappedResponse(url, new ParameterizedTypeReference<>() {});
-        return response.getBody();
-    }
-
-    public PriceHistoryDto fetchStockPricesData(String ticker) {
-        String url = apiProperties.getRootUrl() + "/getData?ticker=" + ticker;
+    public PriceHistoryDto fetchHistoricPricesData(String ticker, LocalDate lastKnownDate) {
+        String formatted = lastKnownDate.format(formatter);
+        String url = apiProperties.getRootUrl() + "/getHistoricData?ticker=" + ticker + "&last_known_date=" + formatted;
         ResponseEntity<PriceHistoryDto> response = getMappedResponse(url, new ParameterizedTypeReference<>() {});
         return response.getBody();
     }
@@ -64,12 +59,6 @@ public class StockAPIClient {
     public CandlestickPatternsDto fetchCandlestickFormations(String ticker) {
         String url = apiProperties.getRootUrl() + "/getFormations?ticker=" + ticker;
         ResponseEntity<CandlestickPatternsDto> response = getMappedResponse(url, new ParameterizedTypeReference<>() {});
-        return response.getBody();
-    }
-
-    public CurrentPricesDto fetchCurrentStockPrices() {
-        String url = apiProperties.getRootUrl() + "/getCurrentStockPrices";
-        ResponseEntity<CurrentPricesDto> response = getMappedResponse(url, new ParameterizedTypeReference<>() {});
         return response.getBody();
     }
 

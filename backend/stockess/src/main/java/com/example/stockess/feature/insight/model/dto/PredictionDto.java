@@ -1,7 +1,7 @@
 package com.example.stockess.feature.insight.model.dto;
 
 import com.example.stockess.feature.insight.model.Prediction;
-import com.example.stockess.feature.insight.model.PredictionId;
+import com.example.stockess.feature.insight.model.CompanyDateId;
 
 import java.time.LocalDate;
 
@@ -22,9 +22,9 @@ public record PredictionDto(
         Double surprise1y
 ) {
     public static PredictionDto from(Prediction prediction) {
-        PredictionId id = prediction.getId();
+        CompanyDateId id = prediction.getId();
         return new PredictionDto(
-                id.getPredictionDate(),
+                id.getDate(),
                 round(prediction.getPastPrice(), 2),
                 round(prediction.getPrediction1m(), 2),
                 round(prediction.getPrediction3m(), 2),

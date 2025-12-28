@@ -9,6 +9,7 @@ import java.util.Map;
 
 @Data
 public class CandlestickPatternsDto {
+
     private Map<String, List<SignalDto>> patterns = new HashMap<>();
 
     @JsonAnySetter

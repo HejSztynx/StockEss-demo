@@ -27,6 +27,8 @@ export const StockEntry: React.FC<Props> = ({ position, currentPrice, onSell, on
     ? (currentPrice || 0) * position.quantity
     : (position.sell_price || 0) * position.quantity);
   const profit = currentValue - buyValue;
+  
+  const changePercent = (currentValue - buyValue) / buyValue * 100;
 
   const gridClass = position.is_open
     ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5"
@@ -76,10 +78,24 @@ export const StockEntry: React.FC<Props> = ({ position, currentPrice, onSell, on
             {profit.toFixed(2)} PLN
           </p>
         </div>
-        <div>
-          <p className="text-xs text-gray-500">Sale date</p>
-          <p className="font-semibold">{position.sell_date || "-"}</p>
-        </div>
+        {position.is_open ? (
+          <div>
+            <p className="text-xs text-gray-500">Change %</p>
+            <p className={`font-semibold ${changePercent >= 0 ? "text-green-600" : "text-red-600"}`}>
+              {changePercent >= 0 ? "+" : ""}
+              {changePercent.toFixed(2)}%
+            </p>
+          </div>
+        ) : (
+          <div>
+            <p className="text-xs text-gray-500">Sale date</p>
+            <p className="font-semibold">{position.sell_date || "-"}</p>
+            <p className={`text-xs mt-1 font-medium ${changePercent >= 0 ? "text-green-600" : "text-red-600"}`}>
+              {changePercent >= 0 ? "+" : ""}
+              {changePercent.toFixed(2)}%
+            </p>
+          </div>
+        )}
 
         {position.is_open && (
           <div>

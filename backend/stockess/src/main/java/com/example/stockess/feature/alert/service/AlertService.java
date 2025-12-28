@@ -33,6 +33,10 @@ public class AlertService {
     private final AlertMapper alertMapper;
     private final ConditionFactory conditionFactory;
 
+    public Alert getById(Long id) {
+        return alertRepository.findById(id).orElseThrow(NoAlertFoundException::new);
+    }
+
     public List<Alert> getAllActive() {
         return alertRepository.findAllByIsActiveIsTrue();
     }
@@ -46,10 +50,9 @@ public class AlertService {
     }
 
     public void updateAlert(AlertDtoRequest request) {
-        User user = userAuthService.getAuthenticatedUser();
         Long alertId = request.getId();
-        Alert alert = alertRepository.findById(alertId).orElseThrow(NoAlertFoundException::new);
-        userAuthService.authenticateUsersAccess(user, alert);
+        Alert alert = getById(alertId);
+        userAuthService.authenticateUsersAccess(alert);
 
         List<Company> companies = request.getCompanies().stream()
                 .map(companyService::getById)
@@ -88,18 +91,16 @@ public class AlertService {
     }
 
     public void activateAlert(Long id) {
-        User user = userAuthService.getAuthenticatedUser();
-        Alert alert = alertRepository.findById(id).orElseThrow(NoAlertFoundException::new);
-        userAuthService.authenticateUsersAccess(user, alert);
+        Alert alert = getById(id);
+        userAuthService.authenticateUsersAccess(alert);
 
         alert.setActive(true);
         alertRepository.save(alert);
     }
 
     public void deactivateAlert(Long id) {
-        User user = userAuthService.getAuthenticatedUser();
-        Alert alert = alertRepository.findById(id).orElseThrow(NoAlertFoundException::new);
-        userAuthService.authenticateUsersAccess(user, alert);
+        Alert alert = getById(id);
+        userAuthService.authenticateUsersAccess(alert);
 
         alert.setActive(false);
         alertRepository.save(alert);
@@ -112,8 +113,8 @@ public class AlertService {
 
     public void deleteAlert(Long id) {
         User user = userAuthService.getAuthenticatedUser();
-        Alert alert = alertRepository.findById(id).orElseThrow(NoAlertFoundException::new);
-        userAuthService.authenticateUsersAccess(user, alert);
+        Alert alert = getById(id);
+        userAuthService.authenticateUsersAccess(alert);
 
         List<BaseCondition> relatedConditions = new ArrayList<>(alert.getConditions());
         relatedConditions.forEach(alert::removeCondition);

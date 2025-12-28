@@ -4,10 +4,19 @@ import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { fetchStockHistory } from "../StockInsights/StockService";
 import { checkSession } from "../Auth/AuthService";
-import { fetchPredictionHistory, fetchPrediction } from "../PredictionHistory/PredictionService"; 
+import {
+  fetchPredictionHistory,
+  fetchPrediction,
+} from "../PredictionHistory/PredictionService";
 import { companyToTickerMap } from "@/constants/constants";
 
-type OHLC = { date: string; open: number; high: number; low: number; close: number };
+type OHLC = {
+  date: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+};
 
 export const useHomePageService = () => {
   /* -------------------------------------------------- */
@@ -19,8 +28,9 @@ export const useHomePageService = () => {
   /* ▸ 2. LOCAL STATE                                   */
   /* -------------------------------------------------- */
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null);
-  const [activeTab, setActiveTab] =
-    useState<"insights" | "predictions" | "earnings" | "news">("insights");
+  const [activeTab, setActiveTab] = useState<
+    "insights" | "predictions" | "earnings" | "news"
+  >("insights");
 
   const [ohlcHistory, setOhlcHistory] = useState<OHLC[]>([]);
   const [predictionData, setPredictionData] = useState<any[]>([]);
@@ -33,14 +43,19 @@ export const useHomePageService = () => {
   });
 
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
-  const [oldestPrice, setOldestPrice] = useState<number | null>(null);
+  const [minPrice, setMinPrice] = useState<number | null>(null);
 
-  const [selectedPredictionRange, setSelectedPredictionRange] =
-    useState<"1m" | "3m" | "6m" | "1y">("1m");
+  const [selectedPredictionRange, setSelectedPredictionRange] = useState<
+    "1m" | "3m" | "6m" | "1y"
+  >("1m");
 
   const today = new Date();
-  const [selectedMonth, setSelectedMonth] = useState<number | null>(today.getMonth() + 1);
-  const [selectedYear, setSelectedYear] = useState<number | null>(today.getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(
+    today.getMonth() + 1,
+  );
+  const [selectedYear, setSelectedYear] = useState<number | null>(
+    today.getFullYear(),
+  );
 
   /* -------------------------------------------------- */
   /* ▸ 3. EFFECTS                                       */
@@ -54,11 +69,9 @@ export const useHomePageService = () => {
   useEffect(() => {
     if (!ohlcHistory.length) {
       setCurrentPrice(null);
-      setOldestPrice(null);
       return;
     }
     setCurrentPrice(ohlcHistory.at(-1)!.close);
-    setOldestPrice(ohlcHistory[0].close);
   }, [ohlcHistory]);
 
   /* -------------------------------------------------- */
@@ -92,23 +105,18 @@ export const useHomePageService = () => {
       }
 
       try {
-        const [
-          historyData,
-          predictionHistory,
-          p1,
-          p3,
-          p6,
-          p12,
-        ] = await Promise.all([
-          fetchStockHistory(ticker),
-          fetchPredictionHistory(ticker),
-          fetchPrediction(ticker, "1m"),
-          fetchPrediction(ticker, "3m"),
-          fetchPrediction(ticker, "6m"),
-          fetchPrediction(ticker, "1y"),
-        ]);
+        const [historyData, predictionHistory, p1, p3, p6, p12] =
+          await Promise.all([
+            fetchStockHistory(ticker),
+            fetchPredictionHistory(ticker),
+            fetchPrediction(ticker, "1m"),
+            fetchPrediction(ticker, "3m"),
+            fetchPrediction(ticker, "6m"),
+            fetchPrediction(ticker, "1y"),
+          ]);
 
         setOhlcHistory(historyData.ohlc_history ?? []);
+        setMinPrice(historyData.ohlc_history[0].close);
         setPredictionData(predictionHistory ?? []);
         setPredictionPrices({
           m1: p1.predicted_price ?? null,
@@ -120,7 +128,7 @@ export const useHomePageService = () => {
         resetSelectedCompanyData();
       }
     },
-    [isLoggedIn, setIsLoggedIn]
+    [isLoggedIn, setIsLoggedIn],
   );
 
   /* -------------------------------------------------- */
@@ -134,11 +142,14 @@ export const useHomePageService = () => {
     predictionData,
     predictionPrices,
     currentPrice,
-    oldestPrice,
+    minPrice,
     selectedPredictionRange,
     selectedMonth,
     selectedYear,
     /* --- setters/handlers --- */
+    setSelectedCompany,
+    setCurrentPrice,
+    setMinPrice,
     setActiveTab,
     setSelectedPredictionRange,
     setSelectedMonth,

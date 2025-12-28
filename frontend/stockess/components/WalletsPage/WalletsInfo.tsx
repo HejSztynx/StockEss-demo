@@ -78,6 +78,17 @@ export default function WalletsInfo() {
               >
                 Profit/Loss: {wallet.totalProfit.toFixed(2)} PLN
               </h2>
+              <h2
+                className={`text-lg font-semibold ${
+                  wallet.totalProfit > 0
+                    ? "text-green-600"
+                    : wallet.totalProfit < 0
+                    ? "text-red-600"
+                    : "text-gray-700"
+                }`}
+              >
+                Change: {wallet.profitPercent.toFixed(2)} %
+              </h2>
                 <p className="text-sm text-gray-500 line-clamp-3">{wallet.description}</p>
               </CardContent>
             </Card>

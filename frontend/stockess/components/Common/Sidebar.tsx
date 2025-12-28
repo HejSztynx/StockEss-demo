@@ -1,18 +1,33 @@
 "use client";
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { wig20Companies } from "@/constants/constants";
 import SelectableList from "./SelectableList";
-
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 interface SidebarProps {
   selectedCompany: string | null;
+  setSelectedCompany: (company: string | null) => void;
   onSelectCompany: (company: string) => void;
 }
 
-export default function Sidebar({ selectedCompany, onSelectCompany }: SidebarProps) {
+export default function Sidebar({
+  selectedCompany,
+  setSelectedCompany,
+  onSelectCompany,
+}: SidebarProps) {
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    setSelectedCompany(null);
+  }, [isLoggedIn]);
+
   return (
     <div className="w-[20%] border-r border-gray-200 p-0 h-full">
       <Accordion type="single" collapsible className="w-full h-full">

@@ -190,18 +190,36 @@ export function CreateAlertModal({ open, onOpenChange}: CreateAlertModalProps) {
           <Label htmlFor="name">Name</Label>
           <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
 
-          <Label htmlFor="date">Date</Label>
-          <Input
-            id="date"
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-fit"
-          />
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="date">Date</Label>
+            <div className="flex flex-row gap-10">
+              <div className="flex flex-col gap-2">
+              <Input
+                id="date"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-fit"
+              />
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="once"
+                checked={once}
+                onCheckedChange={(checked) => setOnce(!!checked)}
+              />
+              <Label htmlFor="once" className="cursor-pointer">
+                Trigger only once
+              </Label>
+            </div>
+            </div>
+            
+          </div>
 
-          <div className="flex gap-10">
-            <div className="flex flex-col gap-2">
-              <Label>Select Companies</Label>
+          <div className="flex flex-col gap-2">
+            <Label>Select Companies</Label>
+            
+            <div className="flex flex-row gap-10">
               <Select onValueChange={handleSelectCompany}>
                 <SelectTrigger>
                   <SelectValue placeholder="Choose a company"/>
@@ -214,37 +232,46 @@ export function CreateAlertModal({ open, onOpenChange}: CreateAlertModalProps) {
                   ))}
                 </SelectContent>
               </Select>
-              <div className="flex flex-wrap gap-2">
-                {selectedCompanies.map(ticker => (
-                  <div
-                    key={ticker}
-                    className="flex items-center gap-2 px-2 py-1 bg-gray-200 rounded-md text-sm"
-                  >
-                    <span>{ticker}</span>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="h-4 w-4 p-0 text-gray-500 hover:text-red-600"
-                      onClick={() =>
-                        setSelectedCompanies(prev => prev.filter(t => t !== ticker))
-                      }
-                      title="Remove company"
-                    >
-                      ✕
-                    </Button>
-                  </div>
-                ))}
-              </div>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const allTickers = Object.values(companyToTickerMap);
+                  const areAllSelected = allTickers.every(t => selectedCompanies.includes(t));
+
+                  if (areAllSelected) {
+                    setSelectedCompanies([]);
+                  } else {
+                    setSelectedCompanies(allTickers);
+                  }
+                }}
+              >
+                {Object.values(companyToTickerMap).every(t => selectedCompanies.includes(t))
+                  ? "Deselect All"
+                  : "Select All"}
+              </Button>
             </div>
-            <div className="flex items-center space-x-2">
-              <Label htmlFor="once" className="cursor-pointer">
-                Trigger only once
-              </Label>
-              <Checkbox
-                id="once"
-                checked={once}
-                onCheckedChange={(checked) => setOnce(!!checked)}
-              />
+            <div className="flex flex-wrap gap-2">
+              {selectedCompanies.map(ticker => (
+                <div
+                  key={ticker}
+                  className="flex items-center gap-2 px-2 py-1 bg-gray-200 rounded-md text-sm"
+                >
+                  <span>{ticker}</span>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="h-4 w-4 p-0 text-gray-500 hover:text-red-600"
+                    onClick={() =>
+                      setSelectedCompanies(prev => prev.filter(t => t !== ticker))
+                    }
+                    title="Remove company"
+                  >
+                    ✕
+                  </Button>
+                </div>
+              ))}
             </div>
           </div>
 

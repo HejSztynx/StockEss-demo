@@ -23,7 +23,7 @@ import java.util.List;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
-    private final AlertRepository alertRepository;
+    private final AlertService alertService;
     private final UserAuthService userAuthService;
     private final NotificationMapper notificationMapper;
 
@@ -36,27 +36,24 @@ public class NotificationService {
     }
 
     public void readNotification(Long id) {
-        User user = userAuthService.getAuthenticatedUser();
         Notification notification = notificationRepository.findById(id).orElseThrow(NoNotificationFoundException::new);
-        userAuthService.authenticateUsersAccess(user, notification);
+        userAuthService.authenticateUsersAccess(notification);
 
         notification.setRead(true);
         notificationRepository.save(notification);
     }
 
     public void readAllNotifications(Long alertId) {
-        User user = userAuthService.getAuthenticatedUser();
-        Alert alert = alertRepository.findById(alertId).orElseThrow(NoAlertFoundException::new);
-        userAuthService.authenticateUsersAccess(user, alert);
+        Alert alert = alertService.getById(alertId);
+        userAuthService.authenticateUsersAccess(alert);
 
         notificationRepository.markAllAsReadByAlertId(alertId);
     }
 
     public void deleteNotification(Long id) {
-        User user = userAuthService.getAuthenticatedUser();
         Notification notification = notificationRepository.findById(id)
                 .orElseThrow(NoNotificationFoundException::new);
-        userAuthService.authenticateUsersAccess(user, notification);
+        userAuthService.authenticateUsersAccess(notification);
 
         Alert alert = notification.getAlert();
         alert.removeNotification(notification);
@@ -65,10 +62,8 @@ public class NotificationService {
     }
 
     public void deleteAllNotifications(Long alertId) {
-        User user = userAuthService.getAuthenticatedUser();
-        Alert alert = alertRepository.findById(alertId)
-                .orElseThrow(NoAlertFoundException::new);
-        userAuthService.authenticateUsersAccess(user, alert);
+        Alert alert = alertService.getById(alertId);
+        userAuthService.authenticateUsersAccess(alert);
 
         notificationRepository.deleteAllByAlertId(alertId);
     }
