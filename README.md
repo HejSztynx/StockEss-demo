@@ -17,6 +17,41 @@
 - **APIs**: Yahoo Finance 📡 (via `yfinance`)
 - **Others**: ApexCharts 📉, TA-Lib 🧠
 
+## 🐳 Running the Application (Docker)
+
+To run the StockEss project, the following tools are required:
+
+- Docker
+- Docker Compose
+
+Make sure Docker is installed and running on your system.
+
+## ▶️ Startup Instructions
+
+Build the Docker images:
+
+```bash
+docker compose -p stockess build
+```
+
+Start all services:
+
+```bash
+docker compose -p stockess up
+```
+
+Once the containers are running, open your browser and go to:
+
+**http://localhost:3000**
+
+## 🛑 Stopping the Application
+
+To stop and remove the running containers, use:
+
+```bash
+docker compose -p stockess down
+```
+
 ## 👥 Authors
 
 - [Krystian Sienkiewicz](https://github.com/HejSztynx)
