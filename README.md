@@ -2,6 +2,10 @@
 
 **StockEss** is a modern web application designed to support users in making informed investment decisions on the stock market. It provides easy access to market data, real-time stock information, predictions of oncoming prices and a suite of intuitive tools to help track and manage investment strategies.
 
+# ⚠️ Demo Information
+
+🧠 **AI Predictions** – No AI models are currently published to this demo, and therefore no price prediction functionality is available.
+
 ## 🚀 Features
 
 - 📊 **Real-Time Quotes** – View the latest market prices and key indicators
